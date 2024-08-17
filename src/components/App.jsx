@@ -7,6 +7,7 @@ import ImageModal from './ImageModal/ImageModal';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { fetchImages } from '../assets/fetchImages';
+import Modal from 'react-modal';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +16,12 @@ const App = () => {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [showLoadMore, setShowLoadMore] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    Modal.setAppElement('#root');
+  }, []);
 
   useEffect(() => {
     if (!query) return;
@@ -49,17 +56,31 @@ const App = () => {
     setPage(prev => prev + 1);
   };
 
+  const openModal = imageUrl => {
+    setSelectedImage(imageUrl);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <SearchBar handleChangeQuery={handleChangeQuery} />
       <main>
-        <ImageGallery images={images} />
+        <ImageGallery images={images} onImageClick={openModal} />
         {isLoading && <Loader />}
         {isError && <ErrorMessage />}
         {showLoadMore && images.length > 0 && (
           <LoadMoreBtn loadMore={loadMore} />
         )}
-        <ImageModal />
+        <ImageModal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          imageUrl={selectedImage}
+        />
       </main>
       <Toaster position="top-right" reverseOrder={false} />
     </>
