@@ -14,6 +14,7 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [showLoadMore, setShowLoadMore] = useState(false);
 
   useEffect(() => {
     if (!query) return;
@@ -22,7 +23,8 @@ const App = () => {
         setIsLoading(true);
         setIsError(false);
         const data = await fetchImages({ query, page });
-        setImages(prev => [...prev, ...data]);
+        setImages(prev => [...prev, ...data.results]);
+        setShowLoadMore(page < data.total_pages);
       } catch (error) {
         setIsError(true);
         toast.error('Unfortunately your request have failed');
@@ -39,6 +41,10 @@ const App = () => {
     setPage(1);
   };
 
+  const loadMore = () => {
+    setPage(prev => prev + 1);
+  };
+
   return (
     <>
       <SearchBar handleChangeQuery={handleChangeQuery} />
@@ -46,7 +52,9 @@ const App = () => {
         <ImageGallery images={images} />
         {isLoading && <Loader />}
         {isError && <ErrorMessage />}
-        <LoadMoreBtn />
+        {showLoadMore && images.length > 0 && (
+          <LoadMoreBtn loadMore={loadMore} />
+        )}
         <ImageModal />
       </main>
       <Toaster position="top-right" reverseOrder={false} />
