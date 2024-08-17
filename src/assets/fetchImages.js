@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-export const fetchImages = async params => {
-  const { data } = await axios.get('https://api.unsplash.com/search/photos', {
+export const fetchImages = async ({ query, page = 1 }) => {
+  const response = await axios.get('https://api.unsplash.com/search/photos', {
     params: {
       client_id: 'fALGFJ4v2oD6wVqz4p4eGwHmTIFeKnOmj0F38cl1zaI',
       per_page: 12,
-      query: 'nature',
-      ...params,
+      orientation: 'landscape',
+      query,
+      page,
     },
   });
-  return data.results;
+
+  return response.data.results;
 };

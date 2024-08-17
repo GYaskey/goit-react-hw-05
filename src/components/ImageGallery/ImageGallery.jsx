@@ -1,18 +1,15 @@
-import toast, { Toaster } from 'react-hot-toast';
-import { fetchImages } from '../../assets/fetchImages';
 import ImageCard from './ImageCard/ImageCard';
-import { useEffect, useState } from 'react';
+import s from './ImageGallery.module.css';
 
-const ImageGallery = () => {
+const ImageGallery = ({ images }) => {
   return (
-    <div>
-      <ul>
-        {images.map(image => (
-          <ImageCard key={image.id} image={image} />
-        ))}
-      </ul>
-      <Toaster position="top-right" reverseOrder={false} />
-    </div>
+    <ul className={s.gallery}>
+      {images.map(image => (
+        <li key={image.id} className={s.galleryItem}>
+          <ImageCard image={image} />
+        </li>
+      ))}
+    </ul>
   );
 };
 
