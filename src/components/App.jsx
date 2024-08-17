@@ -8,16 +8,28 @@ import { useState } from 'react';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
-  console.log(setIsLoading);
+  const [isError, setIsError] = useState(false);
+  const [images, setImages] = useState([]);
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+
+  const handleChangeQuery = newQuery => {
+    setImages([]);
+    setQuery(newQuery);
+    setPage(1);
+  };
+
   return (
-    <div>
-      <SearchBar />
-      <ImageGallery />
-      {isLoading && <Loader />}
-      <LoadMoreBtn />
-      <ErrorMessage />
-      <ImageModal />
-    </div>
+    <>
+      <SearchBar handleChangeQuery={handleChangeQuery} />
+      <main>
+        <ImageGallery />
+        {isLoading && <Loader />}
+        <LoadMoreBtn />
+        {isError && <ErrorMessage />}
+        <ImageModal />
+      </main>
+    </>
   );
 };
 
