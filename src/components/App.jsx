@@ -23,11 +23,15 @@ const App = () => {
         setIsLoading(true);
         setIsError(false);
         const data = await fetchImages({ query, page });
-        setImages(prev => [...prev, ...data.results]);
-        setShowLoadMore(page < data.total_pages);
+        if (data.results.length === 0) {
+          toast.error('No images were found');
+          setShowLoadMore(false);
+        } else {
+          setImages(prev => [...prev, ...data.results]);
+          setShowLoadMore(page < data.total_pages);
+        }
       } catch (error) {
         setIsError(true);
-        toast.error('Unfortunately your request have failed');
       } finally {
         setIsLoading(false);
       }
