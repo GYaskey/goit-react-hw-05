@@ -1,5 +1,6 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -14,7 +15,7 @@
 body {
   min-width: 320px;
   min-height: 100vh;
-  font-family: sans-serif;
+
   line-height: 1.5;
 }
 
@@ -47,6 +48,7 @@ img {
 
 .active {
   color: #00f7d6;
+  text-decoration: solid;
 }
 
 body {

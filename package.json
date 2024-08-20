@@ -1,5 +1,5 @@
 {
-  "name": "goit-react-hw-04",
+  "name": "goit-react-hw-05",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -25,6 +25,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.26.1",
     "sweetalert2": "^11.12.4",
+    "sweetalert2-react-content": "^5.0.7",
     "yup": "^1.4.0"
   },
   "devDependencies": {
