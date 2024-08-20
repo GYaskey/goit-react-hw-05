@@ -4,7 +4,7 @@ import s from './MovieList.module.css';
 const MovieList = ({ movies }) => {
   const location = useLocation();
   const placeholderImg =
-    '../../../public/popcorn-flakes-and-bucket-popcorn-container-white-and-red-cardboard-cup-with-flying-out-and-scatter-snack-seeds-isolated-striped-3d-paper-box-with-fast-food-for-cinema-illustration-vector.jpg';
+    '/popcorn-flakes-and-bucket-popcorn-container-white-and-red-cardboard-cup-with-flying-out-and-scatter-snack-seeds-isolated-striped-3d-paper-box-with-fast-food-for-cinema-illustration-vector.jpg';
 
   return (
     <ul className={s.movieGrid}>
